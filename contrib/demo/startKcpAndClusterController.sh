@@ -11,13 +11,13 @@ KUBECONFIG=${KCP_DATA_ROOT}/.kcp/data/admin.kubeconfig
 source ${DEMO_ROOT}/.startUtils
 setupTraps $0 "rm -Rf ${CURRENT_DIR}/.kcp.running"
 
-if [ -z "${KCP_LISTEN_ADDR}" ]; then
-    echo -e "KCP cannot be started, Please set Address:port for kcp using KCP_LISTEN_ADDR environment";
-    exit 1
+KCP_FLAGS=""
+if [ ! -z "${KCP_LISTEN_ADDR}" ]; then
+    KCP_FLAGS+="--listen=${KCP_LISTEN_ADDR} "
 fi
 
 echo "Starting KCP server ..."
-(cd ${KCP_DATA_ROOT} && exec ${KCP_ROOT}/bin/kcp start --listen="${KCP_LISTEN_ADDR}") &> kcp.log &
+(cd ${KCP_DATA_ROOT} && exec ${KCP_ROOT}/bin/kcp start ${KCP_FLAGS}) &> kcp.log &
 KCP_PID=$!
 echo "KCP server started: $KCP_PID" 
 

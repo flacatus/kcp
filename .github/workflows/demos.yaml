@@ -17,7 +17,7 @@ jobs:
 
     - name: Install latest version of Kind
       run: |
-        curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.10.0/kind-linux-amd64
+        curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
         chmod +x ./kind
         sudo cp kind /usr/local/bin
     - name: Install dependencies before running demos
